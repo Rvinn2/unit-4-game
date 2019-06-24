@@ -5,6 +5,12 @@ var randomResult;
 var lost;
 var win;
 
-console.log(lost);
+for(var i = 0; i < 4; i++){
+    
+    var crystals = $("<div>");
+        crystals.attr("class",'crystals');
+
+    $(".crystal").append(crystals);
+}
 
 
