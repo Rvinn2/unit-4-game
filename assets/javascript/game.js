@@ -4,7 +4,7 @@
 var randomResult;
 var lost;
 var win;
-
+var previous = 0;
 
 randomResult = Math.floor(Math.random() * 69) + 30;
 $("#result").html('Random Result: '+ randomResult);
@@ -28,5 +28,15 @@ for(var i = 0; i < 4; i++){
 
 $(".crystals").on('click', function(){
     
-    console.log($(this).attr("data-random"));
+  var num = parseInt($(this).attr("data-random"));
+
+    previous += num;
+    console.log(previous);
+
+    if(previous > randomResult){
+        console.log("You Lost");
+    }
+    else if(previous === randomResult){
+        console.log("you WIN");
+    }
 })
