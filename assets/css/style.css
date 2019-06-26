@@ -8,7 +8,9 @@
 }
 
 .crystals{
-    border: 1px solid blue;
+    border: 5px solid blue;
     height: 200px;
     width: 200px;
+    border-radius: 5px;
+    
 }

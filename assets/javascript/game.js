@@ -2,41 +2,77 @@
 // Guessed number is 19-120
 
 var randomResult;
-var lost;
-var win;
+var lost =0;
+var win = 0;
 var previous = 0;
 
-randomResult = Math.floor(Math.random() * 69) + 30;
-$("#result").html('Random Result: '+ randomResult);
-// console.log(randomResult)
+var resetAndStart = function(){
+        
+        $(".crystal").empty();
 
-for(var i = 0; i < 4; i++){
-    
+        var images = [
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ47VAT3j5n3IBA4POfJ6Jjhxalq8A7QzOLUYsWKTy1_7kCkLaD2Q',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ47VAT3j5n3IBA4POfJ6Jjhxalq8A7QzOLUYsWKTy1_7kCkLaD2Q',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ47VAT3j5n3IBA4POfJ6Jjhxalq8A7QzOLUYsWKTy1_7kCkLaD2Q',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ47VAT3j5n3IBA4POfJ6Jjhxalq8A7QzOLUYsWKTy1_7kCkLaD2Q'];
 
-    var randomCrys = Math.floor(Math.random() * 11) + 1;
-    // console.log(randomCrys);
-    
-    
-    var crystals = $("<div>");
-        crystals.attr({
-            "class":'crystals',
-            "data-random": randomCrys
-        });
+        randomResult = Math.floor(Math.random() * 69) + 30;
 
-    $(".crystal").append(crystals);
+        $("#result").html('Random Result: ' + randomResult);
+        // console.log(randomResult)
+
+        for(var i = 0; i < 4; i++){
+            
+
+            var randomCrys = Math.floor(Math.random() * 11) + 1;
+            // console.log(randomCrys);
+            
+            
+            var crystals = $("<div>");
+                crystals.attr({
+                    "class":'crystals',
+                    "data-random": randomCrys
+                });
+                crystals.css({
+                    "background-image":"url('" + images[i] + " ')",
+
+                });
+
+            $(".crystal").append(crystals);
+        }
+
+        $("#previous").html("Total Score: " + previous);
 }
 
-$(".crystals").on('click', function(){
+
+
+resetAndStart();
+
+$(document).on('click', ".crystals", function(){
     
-  var num = parseInt($(this).attr("data-random"));
+    var num = parseInt($(this).attr("data-random"));
 
-    previous += num;
-    console.log(previous);
+        previous += num;
 
-    if(previous > randomResult){
-        console.log("You Lost");
-    }
-    else if(previous === randomResult){
-        console.log("you WIN");
-    }
+        $("#previous").html("Total Score: " + previous);    
+
+        console.log(previous);
+
+        if(previous > randomResult){
+            lost--;
+            $("#lost").html("You lost: " + lost);
+
+            pervious = 0;
+   
+            resetAndStart();
+
+        }
+        else if(previous === randomResult){
+            win++;
+            $("#win").html("YOU WIN!" + win);
+
+            previous = 0;
+
+            resetAndStart();
+        }
 })
